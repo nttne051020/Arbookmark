@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>AR Video with Sound</title>
+<title>AR Video</title>
 
 <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
@@ -29,10 +29,11 @@ position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-font-size:24px;
-padding:16px 32px;
+font-size:22px;
+padding:14px 28px;
 background:#ffffffdd;
 border-radius:10px;
+border:none;
 z-index:10;
 }
 
@@ -40,6 +41,11 @@ z-index:10;
 position:absolute;
 top:20px;
 left:20px;
+padding:10px 16px;
+font-size:16px;
+border:none;
+border-radius:8px;
+background:#ffffffdd;
 z-index:10;
 }
 </style>
@@ -79,11 +85,11 @@ muted
 <a-entity id="target" mindar-image-target="targetIndex:0">
 
 <a-video
+id="videoPlane"
 src="#video1"
-width="1.6"
-height="0.9"
-position="0 0 0"
-scale="1.5 1.5 1.5"
+width="1.8"
+height="1"
+position="0 0 0.01"
 ></a-video>
 
 </a-entity>
@@ -97,34 +103,44 @@ const startButton = document.querySelector("#startButton");
 const unmuteBtn = document.querySelector("#unmuteButton");
 const target = document.querySelector("#target");
 
-/* bắt đầu AR */
+/* bấm để bắt đầu AR */
 
 startButton.addEventListener("click",()=>{
+
 video.play().then(()=>{
+
 video.pause();
 startButton.style.display="none";
+
 });
+
 });
 
 /* khi quét thấy marker */
 
 target.addEventListener("targetFound",()=>{
+
 video.currentTime = 0;
 video.play();
+
 });
 
 /* khi mất marker */
 
 target.addEventListener("targetLost",()=>{
+
 video.pause();
+
 });
 
 /* bật tiếng */
 
 unmuteBtn.addEventListener("click",()=>{
-video.muted=false;
+
+video.muted = false;
 video.play();
 unmuteBtn.style.display="none";
+
 });
 
 </script>
