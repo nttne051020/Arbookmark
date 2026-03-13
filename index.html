@@ -87,8 +87,7 @@ muted
 <a-video
 id="videoPlane"
 src="#video1"
-width="1.6"
-height="2.85"
+width="1.3"
 position="0 0 0.01"
 ></a-video>
 
@@ -140,6 +139,17 @@ unmuteBtn.addEventListener("click",()=>{
 video.muted = false;
 video.play();
 unmuteBtn.style.display="none";
+
+});
+  const videoPlane = document.querySelector("#videoPlane");
+
+/* giữ đúng tỷ lệ video */
+
+video.addEventListener("loadedmetadata", () => {
+
+const ratio = video.videoHeight / video.videoWidth;
+
+videoPlane.setAttribute("height", 1.3 * ratio);
 
 });
 
